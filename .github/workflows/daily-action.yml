@@ -1,0 +1,25 @@
+name: Daily Scheduled Action
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Step with email 22f1001255@ds.study.iitm.ac.in
+        run: echo "Running step for 22f1001255@ds.study.iitm.ac.in"
+        
+      - name: Create commit
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          date > last-run.txt
+          git add last-run.txt
+          git commit -m "Automated commit: $(date)"
+          git push
