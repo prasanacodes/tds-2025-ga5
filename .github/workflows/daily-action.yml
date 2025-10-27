@@ -5,12 +5,17 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Step with email 22f1001255@ds.study.iitm.ac.in
         run: echo "Running step for 22f1001255@ds.study.iitm.ac.in"
